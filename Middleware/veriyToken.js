@@ -18,15 +18,11 @@
  const verifyAdminToken = (req, res, next) => {
   const token = req.headers['authorization'];
   if (!token) {
-    return res.status(401).json({ message: 'Access Denied. No Token Provided.' });
+    return res.status(201).json({ message: 'Access Denied. No Token Provided.' });
   }
   try{
-    if(token == 'gghhjjkk'){
-      req.phone = 8427791755
-      return next();
-    }
     const decoded = jwt.verify(token, adminSec);
-    req.phone = decoded
+    req.adminId = decoded
     return next();
   }
   catch(err){
