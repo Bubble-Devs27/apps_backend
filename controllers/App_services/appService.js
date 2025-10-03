@@ -25,8 +25,9 @@ const {location}  = req.query
    }
 }
 async function fetchAdminServicesByID(req ,res){
-const {_id}  = req.query
-
+  console.log('in fetch')
+const {id}  = req.query
+const _id = id;
    try{
      const data = await appService.findById(_id)
     return res.status(200).json(data)
@@ -50,6 +51,7 @@ async function changeStatus(req,res){
 }
 
 async function addNewAppService(req,res){
+  console.log(req.body)
     try{
         const newService = new appService(req.body)
         await newService.save();
@@ -57,9 +59,10 @@ async function addNewAppService(req,res){
     }
     catch(err){
         if (err.code === 11000) {
-      return res.status(400).json({ error: 'Service already exists' });
+      return res.status(201).json({ message: 'Service already exists' });
     }
-        return res.status(200).json({msg :"Internel server error"})
+    
+        return res.status(201).json({message :"Internel server error"})
     }
 }
 async function deleteAllService(req ,res){

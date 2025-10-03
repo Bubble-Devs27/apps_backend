@@ -2,7 +2,7 @@ const express = require('express');
 const {fetchAllCenters, addNewCenter , suspendStation } = require("../controllers/Centers/centerController");
 const { verifyToken, verifyAdminToken } = require('../Middleware/veriyToken');
 const router = express.Router();
-const {fetchAllServices, changeStatus, addNewAppService, deleteAllService, fetchAdminServices}  = require("../controllers/App_services/appService");
+const {fetchAllServices, changeStatus, addNewAppService, deleteAllService, fetchAdminServices, fetchAdminServicesByID}  = require("../controllers/App_services/appService");
 const { bookOrder, fetchOrdersbyStationID } = require('../controllers/Order/orderController');
 const { fetchUserDetails, updateUserDetail } = require('../controllers/User/userController');
 const { checkUserAuth } = require('../Middleware/checkUserAuth');
@@ -19,8 +19,9 @@ router.get('/ping', (req, res) => {
 router.get("/fetch-whyUs" , fetchAllWhyUs )
 router.get("/fetch-whyUs-ById" , fetchWhyUsById )
 router.get('/fetch-app-services' ,fetchAllServices )
-
+router.get('/admin-panel', ()=>{})
 router.post('/book-order', verifyToken, bookOrder )
+router.get('/fetch-service-by-id' , fetchAdminServicesByID)
     // USER AUTHx
     router.get('/gen-otp' , ()=>{})
     router.post('/verify-otp' , verifyUserOTP)
@@ -38,7 +39,7 @@ router.post('/admin-login' ,adminLogin )
 router.post('/add-admin'  ,  addAdmin)
 router.get('/delete-all-services' , verifyAdminToken , deleteAllService)
 router.post("/change-service-status" ,  changeStatus)
-router.post("/add-app-service" , verifyAdminToken , addNewAppService)
+router.post("/add-app-service" , addNewAppService)
 router.get('/fetch-admin-app-services' ,fetchAdminServices )
 router.post('/add-new-station' ,verifyAdminToken ,addNewCenter )
 router.post('/suspend-station' ,verifyAdminToken ,suspendStation )
