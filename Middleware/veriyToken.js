@@ -26,7 +26,7 @@
     return next();
   }
   catch(err){
-    return res.status(201).json({status : 'invalid-token'})
+    return res.status(201).json({message : 'invalid-token'})
   }
 };
 module.exports ={verifyToken ,verifyAdminToken}

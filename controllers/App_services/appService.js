@@ -1,5 +1,5 @@
 const appService = require("../../Models/appService")
-
+const { ObjectId } = require('mongodb'); 
 async function fetchAllServices(req ,res){
 const {location}  = req.query
 
@@ -74,4 +74,27 @@ async function deleteAllService(req ,res){
 
    }
 }
-module.exports = {fetchAllServices ,addNewAppService ,changeStatus , deleteAllService ,fetchAdminServices ,fetchAdminServicesByID}
+
+async function updateServiceById(req ,res){
+    const id = req.body.id;
+    const payload = req.body.payload
+    const {name , image , serviceID , location , prices} = payload
+    if(!name || !image || !serviceID || !location || !prices) {
+      return res.status(201).json({message  : "Please provide all details"})
+    }
+    try {
+        await appService.updateOne(
+          {_id : id},
+          {$set :{
+            name , image , serviceID , location , prices
+          }}
+        )
+        console.log("updated")
+        return res.status(200).json({ message: "Service updated successfully" });
+    }
+    catch(err){
+      console.log(err)
+      return res.status(201).json({message : 'Internal server error'})
+    }
+}
+module.exports = {fetchAllServices ,addNewAppService ,changeStatus , deleteAllService ,fetchAdminServices ,fetchAdminServicesByID ,updateServiceById}

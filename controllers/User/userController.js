@@ -24,6 +24,16 @@ async function fetchUserDetails(req ,res){
 async function updateUserDetail(req,res){
     const {key ,value} = req.body
     const phone = req.phone
-    
+    try {
+        await userModel.updateOne(
+            {phone : phone},
+            {$set : { [key] : value}}
+        )
+        return res.status(200).json({message : 'Car Added'})
+    }
+    catch(err){
+        console.log(err)
+        return res.status(200).json({message : 'Internal server error'})
+    }
 }
 module.exports = {fetchUserDetails , updateUserDetail}

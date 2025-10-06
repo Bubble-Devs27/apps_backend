@@ -2,7 +2,7 @@ const express = require('express');
 const {fetchAllCenters, addNewCenter , suspendStation } = require("../controllers/Centers/centerController");
 const { verifyToken, verifyAdminToken } = require('../Middleware/veriyToken');
 const router = express.Router();
-const {fetchAllServices, changeStatus, addNewAppService, deleteAllService, fetchAdminServices, fetchAdminServicesByID}  = require("../controllers/App_services/appService");
+const {fetchAllServices, changeStatus, addNewAppService, deleteAllService, fetchAdminServices, fetchAdminServicesByID, updateServiceById}  = require("../controllers/App_services/appService");
 const { bookOrder, fetchOrdersbyStationID } = require('../controllers/Order/orderController');
 const { fetchUserDetails, updateUserDetail } = require('../controllers/User/userController');
 const { checkUserAuth } = require('../Middleware/checkUserAuth');
@@ -41,8 +41,7 @@ router.get('/delete-all-services' , verifyAdminToken , deleteAllService)
 router.post("/change-service-status" ,  changeStatus)
 router.post("/add-app-service" , addNewAppService)
 router.get('/fetch-admin-app-services' ,fetchAdminServices )
-router.post('/add-new-station' ,verifyAdminToken ,addNewCenter )
-router.post('/suspend-station' ,verifyAdminToken ,suspendStation )
+router.post(`/update-service-by-id` , updateServiceById)
 
 router.post('/add-whyus' , addWhyUs)
 router.post('/update-whyus',updateWhyUs )

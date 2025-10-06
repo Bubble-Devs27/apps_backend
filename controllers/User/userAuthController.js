@@ -8,7 +8,12 @@ async function verifyUserOTP  (req,res ){
         return res.status(201).json({status : 'Phone or OTP not provided'})
     }
     if(otp == 1234){
-        return res.status(200).json({token : genToken(phone)})
+        const data = await userModel.findOne({phone : phone})
+        if(!data){
+            const added =await userModel.create({phone : phone})
+             return res.status(200).json({token : genToken(phone) , details : added })
+        }
+        return res.status(200).json({token : genToken(phone) , details : data })
     }
     return res.status(201).json({status : 'OTP not verified'})
 }

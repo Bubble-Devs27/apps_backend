@@ -54,6 +54,6 @@ io.on('connection', (socket) => {
 });
 
 // Start server (use server instead of app)
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });

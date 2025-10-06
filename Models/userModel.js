@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
     location :  {type :String , required : true , default : 'NA'},
     allAddress :  {type :[address] , required : true , default : []},
     rating : {type : Number , required : true , default : 0},
-    cars : {type : [car] , required : true , default : null}
+    cars : {type : [car] , required : true , default : []}
 
 } , {
     timestamps : true
