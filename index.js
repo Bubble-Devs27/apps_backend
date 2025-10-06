@@ -4,7 +4,8 @@ const http = require('http');   // <-- Import http
 const { Server } = require('socket.io');  // <-- Import socket.io
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 // Wrap express app inside an HTTP server
 const server = http.createServer(app);
