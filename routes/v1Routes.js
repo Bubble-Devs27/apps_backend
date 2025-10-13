@@ -9,6 +9,8 @@ const { checkUserAuth } = require('../Middleware/checkUserAuth');
 const { verifyUserOTP } = require('../controllers/User/userAuthController');
 const { fetchAllWhyUs, addWhyUs, updateWhyUs, fetchWhyUsById } = require('../controllers/WhyUS/WhyUsController');
 const { addAdmin, adminLogin } = require('../controllers/admin/adminController');
+const {createRazorPayOrder} = require('../controllers/razorPay/razorPay_Controller.js');
+const { verifyRazorPayment } = require('../controllers/razorPay/razorPay_Controller.js');
 
 router.get('/ping', (req, res) => {
   res.json({ message: 'Pong' });
@@ -45,4 +47,9 @@ router.post(`/update-service-by-id` , updateServiceById)
 
 router.post('/add-whyus' , addWhyUs)
 router.post('/update-whyus',updateWhyUs )
+
+
+// RAZOR_PAY ********
+router.post('/create-order' , createRazorPayOrder)
+router.post('/verify-payment' , verifyRazorPayment)
 module.exports = router;
