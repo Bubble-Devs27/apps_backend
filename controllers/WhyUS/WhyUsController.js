@@ -9,7 +9,6 @@ async function fetchAllWhyUs(req,res){
       .sort({ updatedAt: -1 })
       .lean()
       .exec();
-        console.log("RESPONSE" , response)
         return res.status(200).json(response)
    }
    catch(err){

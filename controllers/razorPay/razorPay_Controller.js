@@ -10,10 +10,11 @@ const createRazorPayOrder = async (req ,res)=>{
   
  try {
     const { amount, currency = 'INR', receipt } = req.body;
+    console.log(req.body)
     if (!amount) return res.status(400).json({ error: 'amount required' });
 
     const options = {
-      amount: Math.round(amount * 100), // rupees -> paise
+      amount: amount*100, // rupees -> paise
       currency,
       receipt: receipt || `rcpt_${Date.now()}`,
       payment_capture: 1

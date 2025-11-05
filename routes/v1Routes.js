@@ -30,7 +30,7 @@ router.get('/fetch-service-by-id' , fetchAdminServicesByID)
 
 // USER PROFILE
 router.get('/fetch-user-details' ,verifyToken, fetchUserDetails)
-router.post('/update-user-details' ,verifyToken, updateUserDetail)
+router.post('/update-user-details' , updateUserDetail)
 router.get('/fetch-user-history' ,verifyToken, checkUserAuth, ()=>{})
 
 // STATION TASK APIs ***************

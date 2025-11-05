@@ -22,8 +22,10 @@ async function fetchUserDetails(req ,res){
     }
 }
 async function updateUserDetail(req,res){
-    const {key ,value} = req.body
-    const phone = req.phone
+    const {key ,value , phone} = req.body
+    console.log("KEY" , key);
+    console.log("VALUE" , value);
+    console.log("phone" , phone)
     try {
         await userModel.updateOne(
             {phone : phone},
