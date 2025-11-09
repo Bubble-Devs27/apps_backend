@@ -11,6 +11,7 @@ const { fetchAllWhyUs, addWhyUs, updateWhyUs, fetchWhyUsById } = require('../con
 const { addAdmin, adminLogin } = require('../controllers/admin/adminController');
 const {createRazorPayOrder} = require('../controllers/razorPay/razorPay_Controller.js');
 const { verifyRazorPayment } = require('../controllers/razorPay/razorPay_Controller.js');
+const { fetchLivePackages, addPackage, fetchAllPackages, changePackageStatus, deletePackages  ,editPackage, fetchPackagebyID} = require('../controllers/Packages/PackageController.js');
 
 router.get('/ping', (req, res) => {
   res.json({ message: 'Pong' });
@@ -48,7 +49,14 @@ router.post(`/update-service-by-id` , updateServiceById)
 router.post('/add-whyus' , addWhyUs)
 router.post('/update-whyus',updateWhyUs )
 
-
+// {Packages ****}
+router.get('/fetch-live-packages' , fetchLivePackages)
+router.post('/add-package' ,addPackage)
+router.get('/get-all-packages' ,fetchAllPackages)
+router.post('/fetch-package-byID' ,fetchPackagebyID)
+router.post('/change-package-status' , changePackageStatus)
+router.delete('/delete-package' , deletePackages)
+router.post('/edit-package' , editPackage)
 // RAZOR_PAY ********
 router.post('/create-order' , createRazorPayOrder)
 router.post('/verify-payment' , verifyRazorPayment)
