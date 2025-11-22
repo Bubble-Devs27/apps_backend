@@ -78,7 +78,7 @@ async function deleteAllService(req ,res){
 async function updateServiceById(req ,res){
     const id = req.body.id;
     const payload = req.body.payload
-    const {name , image , serviceID , location , prices} = payload
+    const {name , image , serviceID , location , prices ,description} = payload
     if(!name || !image || !serviceID || !location || !prices) {
       return res.status(201).json({message  : "Please provide all details"})
     }
@@ -86,7 +86,7 @@ async function updateServiceById(req ,res){
         await appService.updateOne(
           {_id : id},
           {$set :{
-            name , image , serviceID , location , prices
+            name , image , serviceID , location , prices , description
           }}
         )
         console.log("updated")
